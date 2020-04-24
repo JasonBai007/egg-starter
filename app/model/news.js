@@ -1,12 +1,12 @@
 module.exports = app => {
-    const { DataTypes, DATE } = app.Sequelize;
+    const { DATE, JSON, TEXT } = app.Sequelize;
 
-    const User = app.model.define('news', {
+    const New = app.model.define('new', {
         time: DATE,
-        titleImg: DataTypes.TEXT('medium'),
-        en: DataTypes.JSON(),
-        cn: DataTypes.JSON(),
-        de: DataTypes.JSON(),
+        titleImg: TEXT('medium'),
+        en: JSON,
+        cn: JSON,
+        de: JSON,
         created_at: DATE,
         updated_at: DATE,
     });
@@ -24,5 +24,5 @@ module.exports = app => {
     //   return await this.update({ last_sign_in_at: new Date() });
     // }
 
-    return User;
+    return New;
 };
