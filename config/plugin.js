@@ -6,9 +6,8 @@ module.exports = {
   // static: {
   //   enable: true,
   // }
-};
-
-exports.sequelize = {
-  enable: true,
-  package: "egg-sequelize",
+  sequelize: {
+    enable: true,
+    package: "egg-sequelize",
+  }
 };
