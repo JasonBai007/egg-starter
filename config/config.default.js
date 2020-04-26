@@ -32,7 +32,7 @@ module.exports = appInfo => {
   config.keys = appInfo.name + '_1587708930376_7167';
 
   // add your middleware config here
-  config.middleware = [];
+  config.middleware = ['layout'];
 
   // add your user config here
   const userConfig = {
