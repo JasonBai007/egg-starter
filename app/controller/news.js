@@ -2,9 +2,56 @@ const Controller = require('egg').Controller;
 
 class NewsController extends Controller {
     async index() {
-        const { ctx, service } = this;
-        // ctx.body = 'adfadsf'
-        ctx.body = await ctx.service.news.find();
+        const { ctx } = this;
+        ctx.body = await ctx.model.News.findAll();
+    }
+
+    async show() {
+        const ctx = this.ctx;
+        ctx.body = await ctx.model.News.findByPk(parseInt(ctx.params.id));
+    }
+
+    async list() {
+        const { ctx } = this;
+        let _data = await ctx.model.News.findAll();
+        ctx.body = _data.map(obj => {
+            return {
+                id: obj.id,
+                title: obj.en.title,
+                date: obj.time
+            }
+        })
+    }
+
+    async create() {
+        const { ctx } = this;
+        ctx.status = 201;
+        ctx.body = await ctx.model.News.create(ctx.request.body);
+    }
+
+    async update() {
+        const ctx = this.ctx;
+        const id = parseInt(ctx.params.id);
+        const one_new = await ctx.model.News.findByPk(id);
+        if (!one_new) {
+            ctx.status = 404;
+            return;
+        }
+        await one_new.update(ctx.request.body);
+        ctx.body = one_new;
+    }
+
+    async destroy() {
+        const ctx = this.ctx;
+        const id = parseInt(ctx.params.id);
+        const one_new = await ctx.model.News.findByPk(id);
+        if (!one_new) {
+            ctx.status = 404;
+            return;
+        }
+
+        await one_new.destroy();
+        ctx.status = 200;
     }
 }
 

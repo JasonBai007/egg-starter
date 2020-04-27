@@ -1,7 +1,7 @@
 module.exports = app => {
     const { DATE, JSON, TEXT, INTEGER } = app.Sequelize;
 
-    const New = app.model.define('news', {
+    const News = app.model.define('news', {
         id: { type: INTEGER, primaryKey: true, autoIncrement: true },
         time: DATE,
         titleImg: TEXT('medium'),
@@ -10,5 +10,5 @@ module.exports = app => {
         de: JSON,
     });
 
-    return New;
+    return News;
 };
