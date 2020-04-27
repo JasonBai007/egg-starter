@@ -30,27 +30,31 @@ class NewsController extends Controller {
     }
 
     async update() {
+        // const ctx = this.ctx;
+        // const id = parseInt(ctx.params.id);
+        // const one_new = await ctx.model.News.findByPk(id);
+        // if (!one_new) {
+        //     ctx.status = 404;
+        //     return;
+        // }
+        // await one_new.update(ctx.request.body);
+        // ctx.body = one_new;
         const ctx = this.ctx;
-        const id = parseInt(ctx.params.id);
-        const one_new = await ctx.model.News.findByPk(id);
-        if (!one_new) {
-            ctx.status = 404;
-            return;
-        }
-        await one_new.update(ctx.request.body);
-        ctx.body = one_new;
+        await ctx.model.News.update(ctx.request.body, {
+            where: {
+                id: parseInt(ctx.params.id)
+            }
+        });
+        ctx.status = 200;
     }
 
     async destroy() {
         const ctx = this.ctx;
-        const id = parseInt(ctx.params.id);
-        const one_new = await ctx.model.News.findByPk(id);
-        if (!one_new) {
-            ctx.status = 404;
-            return;
-        }
-
-        await one_new.destroy();
+        await ctx.model.News.destroy({
+            where: {
+                id: parseInt(ctx.params.id)
+            }
+        })
         ctx.status = 200;
     }
 }
