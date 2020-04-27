@@ -1,5 +1,5 @@
 module.exports = () => {
-    return async function uppercase(ctx, next) {
+    return async function wrap(ctx, next) {
         await next();
         let body = ctx.body;
         ctx.body = {
